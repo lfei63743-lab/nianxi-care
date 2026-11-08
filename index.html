@@ -2559,6 +2559,86 @@ input, textarea, select {
   font-size: 1rem !important;
 }
 
+
+/* ===== 顶部农历节气养生条（与顶部日期气象完美结合） ===== */
+.top-almanac-strip {
+  margin: 8px 14px 0 !important;
+  background: linear-gradient(135deg, #FFFDF0 0%, #FFFBE6 100%) !important;
+  border: 1.5px solid #FDE68A !important;
+  border-radius: 16px !important;
+  padding: 8px 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.08) !important;
+  cursor: pointer !important;
+  transition: transform 0.12s ease !important;
+  box-sizing: border-box !important;
+}
+
+.top-almanac-strip:active {
+  transform: scale(0.98) !important;
+}
+
+.tas-top {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}
+
+.tas-date {
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  color: #92400E !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.tas-badge {
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  color: #B45309 !important;
+  background: #FEF3C7 !important;
+  padding: 2px 8px !important;
+  border-radius: 10px !important;
+  border: 1px solid #FDE68A !important;
+}
+
+.tas-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 6px !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+}
+
+.tas-yi {
+  color: #15803D !important;
+  background: rgba(34, 197, 94, 0.08) !important;
+  padding: 4px 8px !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.tas-ji {
+  color: #B91C1C !important;
+  background: rgba(239, 68, 68, 0.08) !important;
+  padding: 4px 8px !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* 隐藏旧版底部的长条老黄历 */
+.almanac-card:not(.top-almanac-strip) {
+  display: none !important;
+}
+
 </style>
 </head>
 <body>
@@ -3085,6 +3165,17 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
       <button class="h-nav-pill warm" onclick="openScamModal()">🛡️ 反诈守护开启</button>
       <button class="h-nav-pill blue" onclick="openWeatherModal()">🌤️ 今日气象看护</button>
     </nav>
+        <!-- 📅 传统老黄历与节气养生（放上去与顶部日期气象完美结合） -->
+    <div class="top-almanac-strip" id="almanacCard" role="region" aria-label="今日节气与养生建议">
+      <div class="tas-top">
+        <div class="tas-date"><span>📅</span>今日农历：十月初七 · 寒露秋燥</div>
+        <span class="tas-badge">养生微锦囊</span>
+      </div>
+      <div class="tas-grid">
+        <div class="tas-yi">🟢 宜：早睡温水泡脚 · 清蒸南瓜</div>
+        <div class="tas-ji">🔴 忌：迎风久坐 · 空腹浓茶</div>
+      </div>
+    </div>
     <div class="now" id="nowCard" aria-live="polite"></div>
     <div id="wxSlot"></div>
     <div id="msgSlot"></div>
@@ -3112,17 +3203,7 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
       <span class="d-txt"><b>我要出门 · 防忘清单</b><span>钥匙、燃气、手机、带药</span></span>
       <span class="d-arrow">➔</span>
     </div>
-    <!-- 📅 传统老黄历与节气养生微锦囊 -->
-    <div class="almanac-card" id="almanacCard" role="region" aria-label="今日老黄历与养生">
-      <div class="almanac-top">
-        <div class="almanac-date"><span>📅</span>今日农历：十月初七 · 寒露秋燥</div>
-        <span class="almanac-tag">养生建议</span>
-      </div>
-      <div class="almanac-grid">
-        <div class="almanac-yi">🟢 宜：早睡早起 · 温水泡脚 · 清蒸南瓜</div>
-        <div class="almanac-ji">🔴 忌：迎风久坐 · 贪凉吹风 · 空腹浓茶</div>
-      </div>
-    </div>
+    
 
     <!-- 📻 经典长者广播收音机（舒展三层分层排版） -->
     <div class="radio-bar" id="radioBar" role="region" aria-label="长者收音机">
