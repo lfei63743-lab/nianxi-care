@@ -2592,7 +2592,26 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
       <h1>设置</h1><p>改完马上生效</p>
     </div>
     <div class="body">
-      <!-- 🔄 角色视角切换卡片 (答辩与体验模式) -->
+      
+      <!-- 🚨 跌倒检测与急救演练卡片 -->
+      <div class="card" style="border: 2px solid #EF4444; background: linear-gradient(135deg, #FEF2F2 0%, #FFFFFF 100%);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px">
+          <h4 style="margin:0; color:#B91C1C; display:flex; align-items:center; gap:6px">
+            <span>🚨</span> 智能防跌倒守护演练
+          </h4>
+          <span style="font-size:11px; background:#FEE2E2; color:#DC2626; padding:2px 8px; border-radius:10px; font-weight:800">毕业答辩演练</span>
+        </div>
+        <p style="font-size:13px; color:#475569; margin-bottom:12px">
+          系统支持两种判断方式：<br>
+          ① <b>真实物理感知</b>：快速剧烈摇晃/甩动手机（加速度>28m/s²）<br>
+          ② <b>一键模拟测试</b>：点击下方按钮立即触发全套摔倒呼救联动
+        </p>
+        <button class="btn" onclick="triggerFallAlarm()" style="min-height:48px; font-size:15px; border-radius:14px; background:#DC2626; color:#fff; font-weight:800">
+          <span>⚠️</span> 立即模拟长者剧烈摔倒
+        </button>
+      </div>
+
+<!-- 🔄 角色视角切换卡片 (答辩与体验模式) -->
       <div class="card" style="border: 2px solid #2563EB; background: linear-gradient(135deg, #EFF6FF 0%, #FFFFFF 100%);">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px">
           <h4 style="margin:0; color:#1E40AF; display:flex; align-items:center; gap:6px">
@@ -7341,6 +7360,21 @@ document.addEventListener("click",e=>{
 
 /* ================= 防跌倒与意外晃动检测逻辑 ================= */
 let fallTimer = null, fallSec = 30, lastShakeTime = 0;
+
+function requestMotionPermission(){
+  if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+    DeviceMotionEvent.requestPermission()
+      .then(response => {
+        if (response === 'granted') {
+          console.log('DeviceMotionEvent permission granted');
+        }
+      })
+      .catch(console.error);
+  }
+}
+document.addEventListener('click', requestMotionPermission, { once: true });
+document.addEventListener('touchend', requestMotionPermission, { once: true });
+
 function triggerFallAlarm(){
   home();
   const modal = $("#fallAlarm");
