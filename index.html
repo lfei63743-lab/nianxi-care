@@ -2286,6 +2286,12 @@ input, textarea, select {
   box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4) !important;
 }
 
+
+/* 彻底隐藏小花卡片 */
+#flowerBtn, .flower {
+  display: none !important;
+}
+
 </style>
 </head>
 <body>
@@ -2839,7 +2845,6 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
       <span class="d-txt"><b>我要出门 · 防忘清单</b><span>钥匙、燃气、手机、带药</span></span>
       <span class="d-arrow">➔</span>
     </div>
-    <button class="flower" id="flowerBtn" aria-label="今天的小花"><svg class="pot" id="pot" viewBox="0 0 70 78" aria-hidden="true"></svg><div class="fl-body"><b id="flTitle"></b><span id="flSub"></span><span class="dots" id="flDots"></span></div></button>
     <button class="voicebar" id="voiceBtn" aria-label="说话就能用"><span class="mic"><svg><use href="#i-mic"/></svg></span><span><b>不想点，就说一句</b><span>比如说“给晓梅打电话”</span></span></button>
 
     
@@ -6761,6 +6766,7 @@ function potSVG(n,big){
   return s;
 }
 function renderFlower(){
+  if(!$("#flowerBtn") || !$("#pot")) return;
   const g=goals(),n=g.filter(x=>x.ok).length;
   $("#pot").innerHTML=potSVG(n);
   $("#flTitle").textContent=n===5?"今天的小花全开了":`今天的小花开了 ${n} 瓣`;
@@ -6772,7 +6778,7 @@ function renderFlower(){
     if(n===5)push("妈妈今天的小花全开了","吃药、报平安、量血压都做到了","green");}
   lastPetals=n;
 }
-$("#flowerBtn").onclick=()=>{const g=goals();speak(g.every(x=>x.ok)?"今天的小花全开啦，您真棒。":"又开了一片花瓣，真棒。");};
+if($("#flowerBtn")) $("#flowerBtn").onclick=()=>{const g=goals();speak(g.every(x=>x.ok)?"今天的小花全开啦，您真棒。":"又开了一片花瓣，真棒。");};
 
 /* ================= 打勾庆祝 ================= */
 function cheer(text){
