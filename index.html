@@ -6895,29 +6895,41 @@ function playClip(src,tok){return new Promise(res=>{
 // 全局固定语音缓存
 let _lockedAppVoice = null, _lockedNarrVoice = null;
 
+function isMainlandMandarin(v) {
+  if (!v) return false;
+  const lang = (v.lang || '').toLowerCase().replace(/_/g, '-');
+  const name = (v.name || '').toLowerCase();
+  // 严格排除粤语、香港、台湾、繁体语音包
+  if (lang.includes('hk') || lang.includes('tw') || lang.includes('yue') || lang.includes('hant')) return false;
+  if (name.includes('hong kong') || name.includes('cantonese') || name.includes('sin-ji') || name.includes('粤') || name.includes('廣東')) return false;
+  // 必须是普通话 / 大陆中文
+  return lang === 'zh-cn' || lang === 'zh' || lang === 'cmn' || lang === 'cmn-hans-cn' || name.includes('mandarin') || name.includes('普通话') || name.includes('tingting') || name.includes('xiaoxiao') || name.includes('xiaoyi');
+}
+
 function lockVoices(){
   if(!("speechSynthesis" in window)) return;
   const voices = speechSynthesis.getVoices();
   if(!voices || !voices.length) return;
 
-  const targetApp = settings.fixedVoice === "xiaoxiao" ? "xiaoxiao" : "xiaoyi";
-  const targetNarr = "xiaoxiao";
-
-  const findV = (primary) => {
-    const kwList = primary === "xiaoxiao"
-      ? ["xiaoxiao", "晓晓", "xiaoyi", "晓伊", "晓依", "natural", "online"]
-      : ["xiaoyi", "晓伊", "晓依", "xiaoxiao", "晓晓", "natural", "online"];
-    for(const kw of kwList){
-      const v = voices.find(x => (x.lang.includes("zh") || x.lang.includes("cmn")) && x.name.toLowerCase().includes(kw));
+  const mandarinVoices = voices.filter(isMainlandMandarin);
+  
+  // 统一单一发音人：全系统仅由同一位温润亲切的普通话女性发音（小暖原声）
+  // 优先匹配：微软晓晓/晓伊自然女声，或苹果 iOS 官方婷婷 (Ting-Ting) 普通话女声
+  const findV = () => {
+    const prioKw = ["xiaoxiao", "晓晓", "xiaoyi", "晓伊", "tingting", "ting-ting", "婷婷", "natural", "online"];
+    for(const kw of prioKw){
+      const v = mandarinVoices.find(x => x.name.toLowerCase().includes(kw));
       if(v) return v;
     }
-    const zhFem = voices.find(x => (x.lang.includes("zh") || x.lang.includes("cmn")) && (x.name.includes("Female") || x.name.includes("普通话") || x.name.includes("Chinese")));
-    if(zhFem) return zhFem;
-    return voices.find(x => x.lang.includes("zh") || x.lang.includes("cmn")) || voices[0] || null;
+    const fem = mandarinVoices.find(x => x.name.includes("Female") || x.name.includes("女") || x.name.includes("普通话"));
+    if(fem) return fem;
+    return mandarinVoices[0] || voices.find(x => (x.lang||'').startsWith('zh-CN')) || null;
   };
 
-  _lockedAppVoice = findV(targetApp);
-  _lockedNarrVoice = findV(targetNarr);
+  const unifiedVoice = findV();
+  // 强制全系统统一为同一个人！
+  _lockedAppVoice = unifiedVoice;
+  _lockedNarrVoice = unifiedVoice;
 }
 
 if("speechSynthesis" in window){
@@ -6948,13 +6960,12 @@ function tts(t,tok,narr){return new Promise(res=>{
   if(!("speechSynthesis"in window))return setTimeout(res,Math.max(1500,t.length*230));
   speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(t);
-  u.lang="zh-CN";
-  const isNarr = (narr === true || narr === "N|");
-  const v = getBestVoice(isNarr);
+  u.lang="zh-CN"; // 强制大陆标准普通话，彻底杜绝 iOS 粤语
+  const v = getBestVoice(false);
   if(v) u.voice = v;
-  // 严格固化的适老语速与温暖音高
-  u.rate = (isNarr ? 0.94 : 0.96) * settings.rate;
-  u.pitch = isNarr ? 1.05 : 1.12;
+  // 严格固化同一个人温暖柔和的音调与语速
+  u.rate = 0.94 * settings.rate;
+  u.pitch = 1.05;
   const fb=setTimeout(res,Math.max(2500,t.length*300));
   u.onend=()=>{clearTimeout(fb);res();};
   u.onerror=()=>{clearTimeout(fb);res();};
@@ -7501,7 +7512,7 @@ function login(who){
       seeWho("kid");
       kidTab = "home";
       renderKid();
-      speak("晓梅，你好。妈妈今天的情况都在这里。");
+      speak("晓梅，你好。妈妈今天情况平稳，请放心。");
       spot("#kid");
     } else if(who === "both"){
       document.body.classList.remove("see-kid", "see-mom-only");
@@ -7511,7 +7522,7 @@ function login(who){
     } else {
       seeWho("mom");
       home();
-      speak("秀英阿姨，您好呀，念夕今天继续陪伴您。");
+      speak(`${greeting(now)}，秀英阿姨。` + (rainy ? "今天下午有雨，出门记得带伞。" : "今天晴天，十二到二十度。"));
       spot("#phone");
     }
   }, 950);
