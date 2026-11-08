@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="念夕">
@@ -1820,6 +1820,28 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
 .sky{padding-top:46px !important}
 .head{padding-top:46px !important}
 .k-top{padding-top:46px !important}
+
+/* ===== 严格锁屏：禁止双击放大与双指缩放，锁定原生 App 体验 ===== */
+html, body {
+  touch-action: pan-x pan-y;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+.wrapP, .phone, .scr, .canteen, .diet, .modal, .gate {
+  touch-action: pan-y;
+}
+.scr {
+  -webkit-overflow-scrolling: touch;
+}
+input, textarea, select {
+  -webkit-user-select: text;
+  user-select: text;
+  touch-action: manipulation;
+}
+
 </style>
 </head>
 <body>
@@ -8590,6 +8612,44 @@ document.addEventListener('DOMContentLoaded', fitPhoneToScreen);
 setTimeout(fitPhoneToScreen, 50);
 setTimeout(fitPhoneToScreen, 300);
 setTimeout(fitPhoneToScreen, 1000);
+
+
+/* ================= 严格锁定屏幕：禁止双击放大、禁止双指捏合缩放（App原生锁屏体验） ================= */
+// 1. 禁用 iOS 原生手势缩放 (pinch-to-zoom)
+document.addEventListener('gesturestart', function(e) { e.preventDefault(); }, { passive: false });
+document.addEventListener('gesturechange', function(e) { e.preventDefault(); }, { passive: false });
+document.addEventListener('gestureend', function(e) { e.preventDefault(); }, { passive: false });
+
+// 2. 禁用两指及以上多点触控（彻底阻断捏合放大）
+document.addEventListener('touchstart', function(e) {
+  if (e.touches && e.touches.length > 1) {
+    e.preventDefault();
+  }
+}, { passive: false });
+
+// 3. 彻底阻断双击屏幕放大 (Double-tap to zoom)
+let lastTouchEndTime = 0;
+document.addEventListener('touchend', function(e) {
+  const now = Date.now();
+  if (now - lastTouchEndTime <= 300) {
+    e.preventDefault();
+    const clickable = e.target.closest('button, [onclick], [data-mtab], [data-ktab], [data-q], [data-login], [data-who], a, input, select, textarea, .nav-btn, .pill-btn, .cat, .card');
+    if (clickable) {
+      clickable.click();
+    }
+  }
+  lastTouchEndTime = now;
+}, { passive: false });
+
+// 4. 当视口发生缩放或偏移时强制复位原点
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', () => {
+    if (window.visualViewport.scale !== 1) {
+      window.scrollTo(0, 0);
+    }
+  });
+}
+
 </script>
 
 </body>
