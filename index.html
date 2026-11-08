@@ -2502,6 +2502,63 @@ input, textarea, select {
   display: none !important;
 }
 
+
+/* ===== 亲情代购按钮色系重构：与吃药橙色彻底区分，采用亲情守护宝蓝色系 ===== */
+.refill {
+  grid-column: 1 / -1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%) !important;
+  border-radius: 18px !important;
+  padding: 12px 14px !important;
+  border: 1.5px solid #BFDBFE !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08) !important;
+  box-sizing: border-box !important;
+}
+
+.refill b {
+  color: #1E40AF !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.refill .btn {
+  min-height: 52px !important;
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+  color: #FFFFFF !important;
+  border-radius: 16px !important;
+  border: none !important;
+  box-shadow: 0 6px 16px -2px rgba(37, 99, 235, 0.4) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+  transition: transform 0.12s ease !important;
+}
+
+.refill .btn:active {
+  transform: scale(0.96) !important;
+  background: #1E40AF !important;
+}
+
+.refill.sent {
+  background: #ECFDF5 !important;
+  border: 1.5px solid #A7F3D0 !important;
+  box-shadow: none !important;
+}
+
+.refill.sent b {
+  color: #065F46 !important;
+  font-size: 1rem !important;
+}
+
 </style>
 </head>
 <body>
@@ -7048,7 +7105,7 @@ function stockHTML(x){
   let h=`<div class="stock ${low?"low":""}"><span>还剩 ${x.left} 片</span><span class="bar"><i style="width:${pct}%"></i></span><span>约 ${x.left} 天</span></div>`;
   if(low)h+=refillAsked.has(x.id)
     ?`<div class="refill sent"><b>已经告诉晓梅了，她会帮您买</b></div>`
-    :`<div class="refill"><b>${x.name}快吃完了，只够 ${x.left} 天</b><button class="btn" data-refill="${x.id}">让晓梅帮我买</button></div>`;
+    :`<div class="refill"><b>📦 ${x.name}快吃完了，只够 ${x.left} 天</b><button class="btn" data-refill="${x.id}">💌 让晓梅帮我买</button></div>`;
   return h;
 }
 
