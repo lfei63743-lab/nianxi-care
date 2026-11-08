@@ -1944,6 +1944,101 @@ button[data-back] svg, #regBack svg { width:22px; height:22px; }
 /* 详情二级页面沉浸式：隐藏底部导航条，内容拉到底 */
 body.in-sub-page #mTabs { display:none!important; }
 body.in-sub-page .screen { padding-bottom:24px!important; }
+
+/* ══════════ 现代高保真紧凑温润适老 Header (去除低幼卡通，空间减半) ══════════ */
+.sky {
+  padding: 16px 18px 18px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-bottom: 1px solid rgba(0,0,0,0.06) !important;
+  min-height: auto !important;
+}
+.sky .land, .sky .birds, .sky .arc {
+  display: none !important;
+}
+.sky .cloud {
+  opacity: 0.22 !important;
+}
+.sky .toprow {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 12px !important;
+}
+.greet {
+  font-size: 1.85rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.5px !important;
+  line-height: 1.25 !important;
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+  color: var(--skyInk) !important;
+}
+.date {
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  color: var(--skyInk2) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+}
+.now {
+  margin: 14px 14px 0 !important;
+}
+
+/* ══════════ 方案 1：移动端智能等比缩放贴合屏幕 (Fit-Screen) ══════════ */
+@media (max-width: 850px) {
+  html, body {
+    width: 100vw !important;
+    height: 100% !important;
+    height: 100dvh !important;
+    height: 100vh !important;
+    overflow: hidden !important; /* 彻底锁定外层网页禁止无谓下滑！ */
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #0B0F19 !important; /* 深邃曜石黑，配合真机金属边框与圆角 */
+  }
+  .wrapP {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    position: relative !important;
+    overflow: visible !important;
+  }
+  .phone, .kid {
+    display: block !important;
+    width: 375px !important;
+    height: 750px !important;
+    border-radius: 46px !important;
+    border: 9px solid #1B1F2A !important;
+    outline: 2px solid #374151 !important;
+    outline-offset: -2px !important;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75) !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
+    position: relative !important;
+    flex-shrink: 0 !important;
+  }
+  .panel {
+    display: none !important;
+  }
+  .role-switch-pill {
+    position: fixed !important;
+    bottom: 14px !important;
+    right: 14px !important;
+    z-index: 9999 !important;
+  }
+}
+
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -8235,5 +8330,36 @@ function sendHeartNote(text){
 }
 
 </script>
+
+<script>
+/* ══════════ 方案 1：智能等比缩放 (Fit-Screen 锁定贴合算法) ══════════ */
+function fitPhoneToScreen() {
+  if (window.innerWidth > 850) {
+    document.querySelectorAll('.wrapP').forEach(w => {
+      w.style.transform = '';
+      w.style.transformOrigin = '';
+    });
+    return;
+  }
+  const vh = window.innerHeight;
+  const vw = window.innerWidth;
+  // 手机外壳实际外径 (宽约385px, 高约760px)
+  const targetW = 385;
+  const targetH = 760;
+  // 计算等比缩放比，上下留出 8px 安全呼吸距离，确保顶部灵动岛与底部导航栏 100% 尽收眼底
+  const scale = Math.min((vw - 4) / targetW, (vh - 8) / targetH, 1);
+  document.querySelectorAll('.wrapP').forEach(w => {
+    w.style.transform = 'scale(' + scale.toFixed(4) + ')';
+    w.style.transformOrigin = 'center center';
+  });
+}
+window.addEventListener('resize', fitPhoneToScreen);
+window.addEventListener('orientationchange', fitPhoneToScreen);
+document.addEventListener('DOMContentLoaded', fitPhoneToScreen);
+setTimeout(fitPhoneToScreen, 50);
+setTimeout(fitPhoneToScreen, 300);
+setTimeout(fitPhoneToScreen, 1000);
+</script>
+
 </body>
 </html>
