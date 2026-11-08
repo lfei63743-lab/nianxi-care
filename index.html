@@ -2032,6 +2032,146 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
   }
 }
 
+
+/* ══════════ 家人端 (子女手机) 移动端同款高保真比例与贴合 ══════════ */
+@media (max-width: 850px) {
+  .kid {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 375px !important;
+    height: 750px !important;
+    border-radius: 46px !important;
+    border: 9px solid #1B1F2A !important;
+    outline: 2px solid #374151 !important;
+    outline-offset: -2px !important;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75) !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
+    position: relative !important;
+    flex-shrink: 0 !important;
+    background: #F8FAFC !important;
+  }
+  .kid .k-top {
+    padding: 16px 16px 42px !important;
+    border-radius: 0 !important;
+  }
+  .kid .k-body {
+    position: absolute !important;
+    top: 136px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 66px !important;
+    overflow-y: auto !important;
+  }
+  .kid .ktabs {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    height: 66px !important;
+    z-index: 50 !important;
+  }
+}
+
+
+/* ══════════ 移动端双端统一高保真比例 (老人端 & 家人端 1:1 完美同规) ══════════ */
+@media (max-width: 850px) {
+  html, body {
+    width: 100vw !important;
+    height: 100% !important;
+    height: 100dvh !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    background: #0B0F19 !important;
+  }
+  .wrapP {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+    padding-top: 4px !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    position: relative !important;
+    overflow: visible !important;
+    transform-origin: center top !important;
+  }
+  .phone, .kid {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 375px !important;
+    height: 750px !important;
+    border-radius: 46px !important;
+    border: 9px solid #1B1F2A !important;
+    outline: 2px solid #374151 !important;
+    outline-offset: -2px !important;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75) !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
+    position: relative !important;
+    flex-shrink: 0 !important;
+  }
+  .kid {
+    background: #F8FAFC !important;
+  }
+  /* 家人端紧凑顶栏与内容区完美比例 */
+  .kid .k-top {
+    padding: 14px 16px 36px !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+  .kid .k-top h3 {
+    font-size: 19px !important;
+    margin-top: 6px !important;
+  }
+  .kid .k-body {
+    position: absolute !important;
+    top: 130px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 66px !important;
+    overflow-y: auto !important;
+    padding: 0 12px 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .kid .ktabs {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    height: 66px !important;
+    z-index: 50 !important;
+    background: #FFFFFF !important;
+    border-top: 1px solid #E2E8F0 !important;
+  }
+  .panel {
+    display: none !important;
+  }
+  .role-switch-pill {
+    position: fixed !important;
+    top: 10px !important;
+    right: 12px !important;
+    bottom: auto !important;
+    z-index: 99999 !important;
+    padding: 5px 12px !important;
+    font-size: 12px !important;
+    border-radius: 20px !important;
+    background: rgba(15, 23, 42, 0.88) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+  }
+}
+
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -3392,6 +3532,7 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
       </div>
     </div>
   </div>
+</div>
 
 <!-- ============ 演示台 ============ -->
 <aside class="panel">
@@ -6616,11 +6757,14 @@ function renderKid(){
 }
 let kidNew=0;
 function seeWho(w){
+  setTimeout(() => { if(typeof fitPhoneToScreen === "function") fitPhoneToScreen(); }, 20);
+  if(typeof fitPhoneToScreen === "function") setTimeout(fitPhoneToScreen, 10);
   document.body.classList.toggle("see-kid", w === "kid");
   document.body.classList.toggle("see-mom-only", w === "mom");
   document.querySelectorAll("[data-who]").forEach(b => b.setAttribute("aria-pressed", b.dataset.who === w));
   if(w === "kid") renderKid();
   window.scrollTo(0, 0);
+  if(typeof fitPhoneToScreen === "function") setTimeout(fitPhoneToScreen, 10);
 }
 document.addEventListener("click",e=>{const b=e.target.closest("[data-who]");if(b)seeWho(b.dataset.who);});
 document.addEventListener("click",e=>{const t=e.target.closest("[data-ktab]");if(t){kidTab=t.dataset.ktab;if(kidTab==="log")unread=0;renderKid();}
@@ -7352,6 +7496,8 @@ function login(who){
       setTimeout(() => g.style.display = "none", 450);
     }
     if(who === "kid"){
+      setTimeout(() => { if(typeof fitPhoneToScreen === "function") fitPhoneToScreen(); }, 50);
+      if(typeof fitPhoneToScreen === "function") setTimeout(fitPhoneToScreen, 10);
       seeWho("kid");
       kidTab = "home";
       renderKid();
