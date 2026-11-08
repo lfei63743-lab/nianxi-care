@@ -2150,6 +2150,7 @@ input, textarea, select {
 }
 
 
+
 /* ===== 方案 A：极简高雅白底卡片 + 彩色精致底座大图标（适老视觉大降噪） ===== */
 #home .grid {
   display: grid !important;
@@ -2159,7 +2160,17 @@ input, textarea, select {
   margin: 10px 0 0 !important;
 }
 
-#home .tile {
+#home .tile,
+#home .tile.bp,
+#home .tile.act,
+#home .tile.doc,
+#home .tile.pay,
+#home .tile.health,
+#home .tile.srv,
+#home .tile.iot,
+#home .tile.scam,
+#home .tile.fam,
+#home .tile.med {
   background: #FFFFFF !important;
   color: #0F172A !important;
   border: 1.5px solid #E2E8F0 !important;
@@ -2175,6 +2186,11 @@ input, textarea, select {
   transition: transform 0.15s ease, box-shadow 0.15s ease !important;
   position: relative !important;
   overflow: hidden !important;
+}
+
+#home .tile::before,
+#home .tile::after {
+  display: none !important;
 }
 
 #home .tile:active {
@@ -8116,7 +8132,7 @@ document.addEventListener("click", e => {
     box.innerHTML=`<div style="height:100%;display:grid;place-items:center;text-align:center;font-size:12px;color:#4B5262;line-height:1.5">传到网上后<br>这里会出现<br>二维码</div>`;
     $("#qrHint").textContent="现在是在电脑上直接打开的文件。按“使用说明.txt”把这个文件夹传到网上，再打开网址，这里就会出现能扫的二维码。";
   }
-  if("serviceWorker"in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register("sw.js").catch(()=>{});
+  if("serviceWorker"in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.getRegistrations().then(regs => { for(let r of regs) r.unregister(); });
 })();
 
 document.addEventListener("click", e => {
