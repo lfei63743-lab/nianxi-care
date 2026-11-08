@@ -275,6 +275,8 @@ body.b-night .panel .box b,body.b-night .panel .box .t{color:#14171F}
 .tapfx{position:fixed;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;border:5px solid #FFB020;background:rgba(255,176,32,.25);pointer-events:none;z-index:999;animation:tapfx .6s ease-out forwards}
 @keyframes tapfx{from{transform:scale(.4);opacity:1}to{transform:scale(1.15);opacity:0}}
 
+
+.elder-label, .kid-label { display: none !important; }
 /* ---- 开场与登录 (念夕极简高级暮光设计) ---- */
 .gate {
   position: fixed;
@@ -2003,7 +2005,7 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
 </svg>
 
 <div class="wrapP">
-<p class="elder-label">妈妈的手机（老人端）</p>
+
 <div class="phone" id="phone">
   <!-- 🍏 iPhone 灵动岛 (Dynamic Island) · 适老智能守护中枢 -->
   <div class="dynamic-island" id="dynamicIsland" role="region" aria-label="念夕智能守护灵动岛" onclick="tapIsland(event)">
@@ -3223,7 +3225,7 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
 
 <!-- ============ 子女端 ============ -->
 <div class="wrapP">
-<p class="kid-label">女儿晓梅的手机（子女端）</p>
+
 <div class="kid" id="kid" aria-label="女儿晓梅的手机">
   
   <!-- 🍏 女儿端灵动岛 (Dynamic Island) · 亲情连线中枢 -->
