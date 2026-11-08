@@ -11,7 +11,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FF5252'/%3E%3Cstop offset='50%25' stop-color='%23FF7A38'/%3E%3Cstop offset='100%25' stop-color='%23FFA826'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='120' height='120' rx='28' fill='url(%23bg)'/%3E%3Ccircle cx='60' cy='50' r='22' fill='%23FFF5DE'/%3E%3Cpath d='M37 76 C 26 52, 44 32, 60 32 C 76 32, 94 52, 83 76 C 76 89, 66 94, 60 96 C 54 94, 44 89, 37 76 Z' fill='none' stroke='%23FFFFFF' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='60' cy='96' r='4.5' fill='%23FFFFFF'/%3E%3C/svg%3E">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>念夕 —— 面向独居长者的适老化双机协同生活守护系统（极简美学品牌版）</title>
+<title>念夕 —— 面向独居长者的适老化双机协同生活守护系统（全端统一拟真模型版）</title>
 <style>
 :root{
   --ink:#14171F; --ink2:#4B5262; --paper:#FFFFFF; --mist:#EEF1F5; --line:#D5DAE3;
@@ -779,17 +779,48 @@ details ul{padding-left:1.1em}
 .caption small{display:block;font-size:13px;opacity:.6;font-weight:500;margin-top:4px}
 
 @media (max-width:1200px){.panel{width:400px}}
-@media (max-width:480px){
-  body{padding:0;display:block;background:var(--mist)}
-  .wrapP{margin:0}
-  .phone{width:100%;height:100dvh;border:0;border-radius:0;box-shadow:none}
-  .sky{padding-top:max(16px,env(safe-area-inset-top))}
-  .panel,.kid-label,.elder-label,.caption{display:none}
-  .kid{display:none}
-  body{padding-bottom:0}
-  body.see-kid .wrapP:first-of-type{display:none}
-  body.see-kid .kid{display:block;width:100%;height:100dvh;border:0;border-radius:0;box-shadow:none;margin:0;font-size:16px}
-    body.see-kid .kid .k-top{padding-top:max(18px,env(safe-area-inset-top))}
+@media (max-width:850px){
+  body{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    padding:20px 12px 60px !important;
+    background:#EAEFF6 !important;
+    gap:36px !important;
+    overflow-x:hidden !important;
+  }
+  .wrapP{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    margin:0 auto !important;
+  }
+  .elder-label,.kid-label{
+    display:block !important;
+    font-size:14px !important;
+    font-weight:800 !important;
+    color:#556075 !important;
+    text-align:center !important;
+    margin-bottom:10px !important;
+  }
+  .phone,.kid{
+    display:block !important;
+    width:375px !important;
+    max-width:calc(100vw - 20px) !important;
+    height:780px !important;
+    border-radius:46px !important;
+    border:9px solid #1B1F2A !important;
+    outline:2px solid #4A5163 !important;
+    outline-offset:-2px !important;
+    box-shadow:0 30px 60px -20px rgba(10,20,40,.45) !important;
+    margin:0 auto !important;
+  }
+  .panel{
+    display:flex !important;
+    width:375px !important;
+    max-width:calc(100vw - 20px) !important;
+    margin:0 auto !important;
+  }
 }
 
 /* --- 触觉/音频按压质感与流畅回弹 --- */
@@ -916,7 +947,7 @@ body{padding-top:10px!important;padding-bottom:16px!important}
 .wrapP{margin-top:14px!important}
 .kid-label,.elder-label{position:relative!important;top:0!important;margin-bottom:6px!important;font-size:13px!important;font-weight:900!important;letter-spacing:.3px}
 .panel{padding-top:14px!important}
-.quick-dock{margin:-10px -20px 10px!important;width:calc(100% + 40px)!important}
+.quick-dock{display:none !important}
 #gate{display:none!important;pointer-events:none!important;visibility:hidden!important}
 #intro{display:none!important}
 
@@ -1544,29 +1575,7 @@ button[data-back] svg, #regBack svg { width:22px; height:22px; }
 body.in-sub-page #mTabs { display:none!important; }
 body.in-sub-page .screen { padding-bottom:24px!important; }
 </style>
-<div class="quick-dock" id="quickDock">
-  <span>⚡ 右侧一键切换页面：</span>
-  <button class="q-btn active" data-q="home">🏠 首页</button>
-  <button class="q-btn" data-q="meds">💊 吃药</button>
-  <button class="q-btn" data-q="food">🍱 助餐</button>
-  <button class="q-btn" data-q="act">🌸 活动</button>
-  <button class="q-btn" data-q="health">📋 健康档案</button>
-  <button class="q-btn" data-q="service">🛠️ 报修</button>
-  <button class="q-btn" data-q="family">📞 亲情</button>
-  <button class="q-btn" data-q="bp">❤️ 量血压</button>
-  <button class="q-btn" data-q="reg">🏥 挂号</button>
-  <button class="q-btn" data-q="bills">⚡ 水电费</button>
-  <button class="q-btn" data-q="settings">⚙️ 设置</button>
-  <button class="q-btn kid-tab" data-q="kid">👧 女儿端</button>
-  <button class="q-btn" id="dockAiBtn" style="background:#FFF7ED;color:#C2410C;border-color:#FDBA74">🎙️ 问小暖</button>
-  <button class="q-btn" id="dockTaxiBtn" style="background:#F0F9FF;color:#0369A1;border-color:#BAE6FD">🚕 一键叫车</button>
-  <button class="q-btn" id="dockScamBtn" style="background:#FEF2F2;color:#B91C1C;border-color:#FECACA">🛡️ 模拟反诈拦截</button>
-  <button class="q-btn" id="dockBrainBtn" style="background:#F0FDF4;color:#15803D;border-color:#BBF7D0">🧠 健脑小茶馆</button>
-  <button class="q-btn" id="dockAbBtn" style="background:#FAF5FF;color:#7E22CE;border-color:#E9D5FF">⚖️ 毕设AB对比</button>
-  <button class="q-btn" id="dockTheaterBtn" style="background:linear-gradient(135deg,#FEF3C7,#FDE68A);color:#92400E;border-color:#F59E0B;font-weight:900">🎬 秀英阿姨的一天·全天漫游</button>
-  <button class="q-btn" id="dockReportBtn" style="background:#E0F2FE;color:#0369A1;border-color:#7DD3FC;font-weight:900">📊 论文实测数据看板</button>
-  <button class="q-btn" id="dockIotBtn" style="background:#ECFDF5;color:#047857;border-color:#6EE7B7;font-weight:900">🏡 智能家居无感物联</button>
-</div>
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></symbol>
   <symbol id="i-speak" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12"/></symbol>
