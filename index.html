@@ -2149,6 +2149,127 @@ input, textarea, select {
   display: none !important;
 }
 
+
+/* ===== 方案 A：极简高雅白底卡片 + 彩色精致底座大图标（适老视觉大降噪） ===== */
+#home .grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 12px !important;
+  padding: 10px 14px !important;
+  margin: 10px 0 0 !important;
+}
+
+#home .tile {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 20px !important;
+  min-height: 106px !important;
+  padding: 14px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  box-shadow: 0 4px 14px -3px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+#home .tile:active {
+  transform: scale(0.97) !important;
+  background: #F8FAFC !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* 磁贴文字层次优化（大号清晰黑字 + 柔和副标题） */
+#home .tile span:not(.badge):not(.t-emoji):not(.t-icon-box) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  width: 100% !important;
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  color: #0F172A !important;
+  line-height: 1.25 !important;
+  margin-top: 8px !important;
+}
+
+#home .tile small {
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  color: #64748B !important;
+  margin-top: 3px !important;
+  display: block !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* 统一 44px x 44px 独立浅彩底座与大图标 */
+#home .tile svg,
+#home .tile .t-emoji {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: none !important;
+  font-size: 24px !important;
+  margin-bottom: 2px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* 每个功能专属的高雅柔和彩色底座与图标色 */
+#home .tile.bp svg {
+  background: #FEE2E2 !important;
+  fill: #E11D48 !important;
+  color: #E11D48 !important;
+}
+#home .tile.act .t-emoji {
+  background: #FEF3C7 !important;
+}
+#home .tile.doc svg {
+  background: #CCFBF1 !important;
+  fill: #0D9488 !important;
+  color: #0D9488 !important;
+}
+#home .tile.pay svg {
+  background: #EDE9FE !important;
+  fill: #7C3AED !important;
+  color: #7C3AED !important;
+}
+#home .tile.health .t-emoji {
+  background: #E0F2FE !important;
+}
+#home .tile.srv .t-emoji {
+  background: #F1F5F9 !important;
+}
+#home .tile.iot .t-emoji,
+#home .tile[onclick*="openIotModal"] .t-emoji {
+  background: #FFEDD5 !important;
+}
+#home .tile.scam .t-emoji,
+#home .tile[onclick*="openScamModal"] .t-emoji {
+  background: #FEE2E2 !important;
+}
+
+/* 角标优化 */
+#home .tile .badge {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  background: #EF4444 !important;
+  color: #FFFFFF !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  padding: 2px 7px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4) !important;
+}
+
 </style>
 </head>
 <body>
@@ -2688,8 +2809,8 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
       <button class="tile pay" data-go="bills"><span class="badge" id="billBadge"></span><svg><use href="#i-bill"/></svg><span>交水电费<small id="billSub"></small></span></button>
       <button class="tile health" onclick="openBrainModal()"><span class="t-emoji">🧠</span><span>健脑茶馆<small>每日益智·防脑退化</small></span></button>
       <button class="tile srv" data-go="service"><span class="t-emoji">🛠️</span><span>上门报修<small>物业师傅上门</small></span></button>
-      <button class="tile" style="background:linear-gradient(135deg,#D97706,#B45309)" onclick="openIotModal()"><span class="t-emoji">🏡</span><span>智能家居<small>燃气·夜灯无感看护</small></span></button>
-      <button class="tile" style="background:linear-gradient(135deg,#DC2626,#991B1B)" onclick="openScamModal()"><span class="t-emoji">🛡️</span><span>反诈卫士<small>可疑来电·AI拦截</small></span></button>
+      <button class="tile iot" onclick="openIotModal()"><span class="t-emoji">🏡</span><span>智能家居<small>燃气·夜灯无感看护</small></span></button>
+      <button class="tile scam" onclick="openScamModal()"><span class="t-emoji">🛡️</span><span>反诈卫士<small>可疑来电·AI拦截</small></span></button>
     </div>
     <div class="door-entry" id="doorBtn" onclick="openDoorModal()" role="button" aria-label="出门防忘清单">
       <span class="d-ico-linear">
