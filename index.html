@@ -2639,6 +2639,160 @@ input, textarea, select {
   display: none !important;
 }
 
+
+/* ===== 防跌倒警报全屏重构：鲜艳橙色底 + 超大黄三角 + 巨号亮黄倒计时 + 亮黄呼救字 ===== */
+.fall-alarm {
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(180deg, #FF4D00 0%, #FF6A00 50%, #E63E00 100%) !important;
+  color: #FFFFFF !important;
+  z-index: 9999 !important;
+  display: none !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 28px 24px 34px !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+.fall-alarm.on {
+  display: flex !important;
+  animation: fallVividPulse 1.6s ease-in-out infinite alternate !important;
+}
+
+@keyframes fallVividPulse {
+  0% { filter: brightness(1); }
+  100% { filter: brightness(1.08); }
+}
+
+/* 放大至原来整个圆圈大小（100px）的黄色三角形感叹号（去掉白色圆框） */
+.fall-warn-icon {
+  width: 104px !important;
+  height: 94px !important;
+  margin-bottom: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.28)) !important;
+  animation: warnShake 1.8s ease-in-out infinite !important;
+}
+
+.fall-warn-icon svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@keyframes warnShake {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+/* 纯白超大标题 */
+.fall-alarm h2 {
+  font-size: 1.85rem !important;
+  font-weight: 900 !important;
+  color: #FFFFFF !important;
+  line-height: 1.3 !important;
+  margin-bottom: 16px !important;
+  letter-spacing: 0.5px !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* 移上来的两行倒计时盒 */
+.fall-timer-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 24px !important;
+  background: rgba(0, 0, 0, 0.18) !important;
+  border-radius: 20px !important;
+  padding: 10px 24px 12px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  width: calc(100% - 16px) !important;
+}
+
+.fall-digits-row {
+  display: flex !important;
+  align-items: baseline !important;
+  justify-content: center !important;
+  gap: 4px !important;
+}
+
+/* 亮黄超大倒计时数字（29/30超显眼） */
+.fall-num-large {
+  font-size: 4.6rem !important;
+  font-weight: 950 !important;
+  color: #FFE600 !important;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+  line-height: 1 !important;
+  letter-spacing: -2px !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+.fall-unit {
+  font-size: 1.6rem !important;
+  font-weight: 900 !important;
+  color: #FFFBEB !important;
+  margin-left: 4px !important;
+}
+
+/* 另起一行的提示文字 */
+.fall-label-row {
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: #FFFFFF !important;
+  letter-spacing: 0.5px !important;
+  margin-top: 4px !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* 按钮区 */
+.fall-acts {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+/* 我没事，没摔倒（大白底按钮） */
+.fall-btn-ok {
+  min-height: 64px !important;
+  border-radius: 22px !important;
+  background: #FFFFFF !important;
+  color: #E63E00 !important;
+  font-size: 1.35rem !important;
+  font-weight: 950 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28) !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: transform 0.12s ease !important;
+}
+.fall-btn-ok:active {
+  transform: scale(0.96) !important;
+}
+
+/* 我摔倒了，马上呼救（文字换成超高对比亮黄色！） */
+.fall-btn-help {
+  min-height: 56px !important;
+  border-radius: 20px !important;
+  background: rgba(0, 0, 0, 0.45) !important;
+  color: #FFE600 !important; /* 亮黄色文字！ */
+  border: 2px solid rgba(255, 230, 0, 0.8) !important;
+  font-size: 1.25rem !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.5px !important;
+  cursor: pointer !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25) !important;
+  transition: transform 0.12s ease !important;
+}
+.fall-btn-help:active {
+  transform: scale(0.96) !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
 </style>
 </head>
 <body>
@@ -3928,12 +4082,29 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
     </div>
   </div>
 
-    <!-- 防跌倒震动异常警报弹窗 -->
+      <!-- 防跌倒震动异常警报弹窗（鲜艳橙底 + 超大黄色感叹号 + 超大倒计时数字） -->
   <div class="fall-alarm" id="fallAlarm" role="alertdialog" aria-modal="true" aria-labelledby="fallT">
-    <div class="fall-ring">⚠️</div>
+    <!-- 100px 超大纯黄色三角形叹号（无圆形框） -->
+    <div class="fall-warn-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="#FFE600" stroke="#D97706" stroke-width="0.8" stroke-linejoin="round">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+        <line x1="12" y1="9" x2="12" y2="13" stroke="#78350F" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="12" cy="17" r="1.3" fill="#78350F" stroke="none"/>
+      </svg>
+    </div>
+
     <h2 id="fallT">检测到剧烈晃动<br>秀英阿姨，您摔倒了吗？</h2>
-    <p>如果是不小心碰掉手机，请点下面按钮；<br>若无回应，将立即自动拨打 120 并通知晓梅！</p>
-    <div class="fall-cnt" id="fallCnt">倒计时 30 秒后自动呼救</div>
+
+    <!-- 移上来的超大倒计时：两行排版，数字超大黄色突出 -->
+    <div class="fall-timer-wrap">
+      <div class="fall-digits-row">
+        <span class="fall-num-large" id="fallNum">30</span>
+        <span class="fall-unit">秒</span>
+      </div>
+      <div class="fall-label-row">后自动呼救 120 并通知家人</div>
+    </div>
+    <div id="fallCnt" style="display:none">倒计时 30 秒后自动呼救</div>
+
     <div class="fall-acts">
       <button class="fall-btn-ok" id="fallCancel">我没事，没摔倒！</button>
       <button class="fall-btn-help" id="fallHelpNow">我摔倒了，马上呼救</button>
@@ -8235,11 +8406,13 @@ function triggerFallAlarm(){
   if(!modal) return;
   modal.classList.add("on");
   fallSec = 30;
-  $("#fallCnt").textContent = "倒计时 " + fallSec + " 秒后自动呼救 120";
+  if($("#fallNum")) $("#fallNum").textContent = fallSec;
+  if($("#fallCnt")) $("#fallCnt").textContent = "倒计时 " + fallSec + " 秒后自动呼救 120";
   speak("检测到剧烈晃动。秀英阿姨，您摔倒了吗？如果没事，请点屏幕上的白色大按钮。");
   if(fallTimer) clearInterval(fallTimer);
   fallTimer = setInterval(()=>{
     fallSec--;
+    if($("#fallNum")) $("#fallNum").textContent = fallSec;
     if($("#fallCnt")) $("#fallCnt").textContent = "倒计时 " + fallSec + " 秒后自动呼救 120";
     if(fallSec <= 0){
       clearInterval(fallTimer);
