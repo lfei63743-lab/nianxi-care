@@ -2005,12 +2005,7 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
   }
   .wrapP {
     display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    width: 100vw !important;
-    height: 100dvh !important;
+    align-items: flex-start !important; justify-content: center !important; margin: 0 auto !important; padding-top: 4px !important; width: 100vw !important; height: 100dvh !important;
     position: relative !important;
     overflow: visible !important;
   }
@@ -2031,9 +2026,7 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
   .panel {
     display: none !important;
   }
-  .role-switch-pill {
-    position: fixed !important;
-    bottom: 14px !important;
+  .role-switch-pill { position: fixed !important; top: 12px !important; bottom: auto !important;
     right: 14px !important;
     z-index: 9999 !important;
   }
@@ -8345,12 +8338,12 @@ function fitPhoneToScreen() {
   const vw = window.innerWidth;
   // 手机外壳实际外径 (宽约385px, 高约760px)
   const targetW = 385;
-  const targetH = 760;
+  const targetH = 770;
   // 计算等比缩放比，上下留出 8px 安全呼吸距离，确保顶部灵动岛与底部导航栏 100% 尽收眼底
   const scale = Math.min((vw - 4) / targetW, (vh - 8) / targetH, 1);
   document.querySelectorAll('.wrapP').forEach(w => {
     w.style.transform = 'scale(' + scale.toFixed(4) + ')';
-    w.style.transformOrigin = 'center center';
+    w.style.transformOrigin = 'center top'; w.style.marginTop = '2px';
   });
 }
 window.addEventListener('resize', fitPhoneToScreen);
