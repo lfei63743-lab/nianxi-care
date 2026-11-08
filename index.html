@@ -1253,7 +1253,7 @@ body{padding-top:10px!important;padding-bottom:16px!important}
 /* #gate enabled */
 
 /* 🔄 悬浮角色切换按钮 */
-.role-switch-pill{
+.role-switch-pill { display: none !important; 
   position:fixed;
   bottom:20px;
   right:16px;
@@ -2026,7 +2026,7 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
   .panel {
     display: none !important;
   }
-  .role-switch-pill { position: fixed !important; top: 12px !important; bottom: auto !important;
+  .role-switch-pill { display: none !important;  position: fixed !important; top: 12px !important; bottom: auto !important;
     right: 14px !important;
     z-index: 9999 !important;
   }
@@ -2155,7 +2155,7 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
   .panel {
     display: none !important;
   }
-  .role-switch-pill {
+  .role-switch-pill { display: none !important; 
     position: fixed !important;
     top: 10px !important;
     right: 12px !important;
@@ -2565,6 +2565,20 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
       <h1>设置</h1><p>改完马上生效</p>
     </div>
     <div class="body">
+      <!-- 🔄 角色视角切换卡片 (答辩与体验模式) -->
+      <div class="card" style="border: 2px solid #2563EB; background: linear-gradient(135deg, #EFF6FF 0%, #FFFFFF 100%);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px">
+          <h4 style="margin:0; color:#1E40AF; display:flex; align-items:center; gap:6px">
+            <span>⇄</span> 切换体验角色
+          </h4>
+          <span style="font-size:11px; background:#DBEAFE; color:#1D4ED8; padding:2px 8px; border-radius:10px; font-weight:800">视角选择</span>
+        </div>
+        <p style="font-size:13px; color:#475569; margin-bottom:12px">随时切换视角：长者守护界面、家人关爱端或双机同屏协同</p>
+        <button class="btn b-fam" onclick="openGate(true)" style="min-height:50px; font-size:16px; border-radius:14px; background:#2563EB; color:#fff">
+          <span>⇄</span> 重新选择角色（老人版 / 家人版）
+        </button>
+      </div>
+
       <div class="card"><h4>字的大小</h4>
         <div class="seg" role="group" aria-label="字的大小">
           <button data-size="" aria-pressed="true">标准</button><button data-size="big" aria-pressed="false" style="font-size:1.12em">大</button><button data-size="huge" aria-pressed="false" style="font-size:1.25em">特大</button>
@@ -3490,7 +3504,7 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
 <div class="banner" id="banner"></div>
   <div class="k-top">
     <svg class="k-deco" viewBox="0 0 330 120" preserveAspectRatio="none" aria-hidden="true"><circle cx="290" cy="22" r="40" fill="rgba(255,255,255,.07)"/><circle cx="20" cy="110" r="60" fill="rgba(255,255,255,.05)"/></svg>
-    <div class="k-row"><span style="display:flex;align-items:center;gap:8px">念夕 · 亲情守护版 <button class="k-theme-btn" id="kThemeBtn" title="切换家人版背景颜色">🎨 换背景</button></span><span style="display:flex;align-items:center;gap:10px"><span id="kClock">14:30</span><button class="k-out" id="kOut">退出</button></span></div>
+    <div class="k-row"><span style="display:flex;align-items:center;gap:8px">念夕 · 亲情守护版 <button class="k-theme-btn" id="kThemeBtn" title="切换家人版背景颜色">🎨 换背景</button></span><span style="display:flex;align-items:center;gap:10px"><span id="kClock">14:30</span><button class="k-out" id="kOut">⇄ 切换角色</button></span></div>
     <div class="k-mom"><span class="k-av">秀</span><div><h3><i></i><span id="kStatus">妈妈一切都好</span></h3><p id="kSub">最近一次动静：刚刚</p></div></div>
     <div class="k-there" id="kThere"></div>
   </div>
@@ -3614,10 +3628,7 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
 
 <div class="caption" id="caption" aria-live="polite"></div>
 
-<!-- 🔄 悬浮切换角色胶囊按钮 (专为手机端/扫码随时重选角色设计) -->
-<button class="role-switch-pill" onclick="openGate(true)" aria-label="切换老人版或家人版">
-  <span>⇄</span> 切换角色
-</button>
+<!-- 悬浮切换角色按钮已移入【设置】与【家人端右上角】 -->
 
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gTitle">
   <!-- 弥散柔光背景 -->
