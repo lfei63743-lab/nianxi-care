@@ -2172,6 +2172,33 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
   }
 }
 
+
+/* 🍏 家人端灵动岛与老人端 1:1 相同伸缩动效与质感 */
+#kidIsland {
+  width: 136px;
+  transition: all .36s cubic-bezier(.34,1.45,.64,1);
+}
+#kidIsland.expanded {
+  width: calc(100% - 22px) !important;
+  max-width: 350px !important;
+  min-height: 112px !important;
+  height: auto !important;
+  border-radius: 28px !important;
+  background: #090D14 !important;
+  padding: 12px 14px !important;
+  box-shadow: 0 22px 50px rgba(0,0,0,.75), 0 0 0 1.5px rgba(255,255,255,.16) !important;
+  cursor: default !important;
+}
+#kidIsland.expanded .island-compact {
+  display: none !important;
+}
+#kidIsland.expanded .island-expanded {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  animation: expIn .24s ease-out !important;
+}
+
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -3471,7 +3498,7 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
 <div class="kid" id="kid" aria-label="女儿晓梅的手机">
   
   <!-- 🍏 女儿端灵动岛 (Dynamic Island) · 亲情连线中枢 -->
-  <div class="dynamic-island" id="kidIsland" style="width:140px" role="region" aria-label="女儿端亲情连线灵动岛" onclick="tapKidIsland(event)">
+  <div class="dynamic-island" id="kidIsland" role="region" aria-label="女儿端亲情连线灵动岛" onclick="tapKidIsland(event)">
     <div class="island-compact">
       <div class="island-left">
         <span class="island-dot" style="background:#22C55E"></span>
@@ -6647,11 +6674,20 @@ function collapseIsland(e){
   if(isl) isl.classList.remove("expanded");
 }
 
+function updateKidIsland(){
+  const expBody = document.getElementById("kidIslandExpBody");
+  if(expBody){
+    expBody.innerHTML = "👵 妈妈居家守护中 · 血压 126/82 正常 · 电量充足<br>📍 上次活动：客厅（刚刚）· 亲情热线随时接通";
+  }
+}
 function tapKidIsland(e){
   const isl = document.getElementById("kidIsland");
   if(!isl) return;
   if(e.target.closest("button")) return;
   isl.classList.toggle("expanded");
+  if(isl.classList.contains("expanded")){
+    updateKidIsland();
+  }
 }
 
 function collapseKidIsland(e){
