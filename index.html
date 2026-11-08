@@ -1842,6 +1842,313 @@ input, textarea, select {
   touch-action: manipulation;
 }
 
+
+/* ===== 适老视觉降噪与小花单行排版优化 ===== */
+.flower {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 10px 14px 0 !important;
+  padding: 10px 16px !important;
+  border-radius: 20px !important;
+  background: linear-gradient(135deg, #FFF7F8 0%, #FFFDF8 100%) !important;
+  border: 1.5px solid #F8D7DC !important;
+  box-shadow: 0 4px 12px -4px rgba(244, 143, 177, 0.2) !important;
+  text-align: left !important;
+  width: auto !important;
+  cursor: pointer !important;
+}
+.flower svg.pot {
+  width: 52px !important;
+  height: 58px !important;
+  flex: none !important;
+  overflow: visible !important;
+}
+.flower .fl-body {
+  flex: 1 !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+.flower b, .flower #flTitle {
+  display: block !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: #1E293B !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+}
+.flower #flSub {
+  display: block !important;
+  font-size: 0.8rem !important;
+  line-height: 1.25 !important;
+  color: #64748B !important;
+  margin-top: 3px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.flower .dots {
+  display: flex !important;
+  gap: 6px !important;
+  margin-top: 5px !important;
+}
+.flower .dots i {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background: #EADDE0 !important;
+  display: inline-block !important;
+}
+.flower .dots i.on {
+  background: #E56B8A !important;
+}
+
+/* 首页视觉降噪：在首页有大号语音条时，隐藏悬浮重叠的“问小暖”按钮，防止挡字 */
+#phone:has(#home.on) .ai-float-btn {
+  display: none !important;
+}
+.screen#home.on ~ .ai-float-btn {
+  display: none !important;
+}
+
+/* 统一首页各卡片莫兰迪柔和视觉与间距 */
+.wxtip {
+  margin: 10px 14px 0 !important;
+  padding: 10px 16px !important;
+  border-radius: 20px !important;
+}
+.door-entry {
+  margin: 10px 14px 0 !important;
+  padding: 10px 16px !important;
+  border-radius: 20px !important;
+  border: 1.5px solid #FED7AA !important;
+}
+.voicebar {
+  margin: 10px 14px 0 !important;
+  padding: 0 16px !important;
+  border-radius: 20px !important;
+}
+
+
+/* ===== 适老首页重构与极简规范样式 ===== */
+/* 鲜艳活力橙色吃药按钮 */
+.btn.b-med, button.b-med {
+  background: linear-gradient(135deg, #FF6500 0%, #FF8A00 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 900 !important;
+  font-size: 1.25rem !important;
+  border-radius: 18px !important;
+  box-shadow: 0 8px 24px -4px rgba(255, 101, 0, 0.45), inset 0 1px 0 rgba(255,255,255,0.4) !important;
+  border: none !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+}
+.btn.b-med:active {
+  transform: scale(0.97) !important;
+  background: linear-gradient(135deg, #E65100 0%, #FF6500 100%) !important;
+}
+
+/* 核心卡内嵌天气伴随条（吃药+天气二合一） */
+.card-weather-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #F0F4FF;
+  border: 1px solid #D6E2FF;
+  border-radius: 12px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  color: #1E3A8A;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.card-weather-strip .cws-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+.card-weather-strip .cws-temp {
+  font-weight: 900;
+  color: #1D4ED8;
+}
+.card-weather-strip .cws-dot {
+  opacity: 0.5;
+}
+.card-weather-strip .cws-tip {
+  color: #3B82F6;
+}
+
+/* 鲜明高清药丸图标底座（彻底杜绝看不清） */
+.pillpic.vivid-pill {
+  width: 54px !important;
+  height: 54px !important;
+  border-radius: 16px !important;
+  background: linear-gradient(135deg, #FFF1E6 0%, #FFE4D0 100%) !important;
+  border: 2px solid #FFBA88 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: none !important;
+  box-shadow: 0 4px 10px rgba(255, 138, 0, 0.15) !important;
+}
+.pillpic.vivid-pill svg {
+  width: 34px !important;
+  height: 34px !important;
+}
+
+/* 出门防忘清单：精致线性门图标与单行排版 */
+.door-entry {
+  margin: 10px 14px 0 !important;
+  background: linear-gradient(135deg, #FFF8F0 0%, #FFF4E6 100%) !important;
+  border: 1.5px solid #FED7AA !important;
+  border-radius: 20px !important;
+  padding: 11px 15px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 12px -4px rgba(234, 88, 12, 0.12) !important;
+}
+.door-entry .d-ico-linear {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 14px !important;
+  background: #FFF !important;
+  border: 1.5px solid #FDBA74 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: none !important;
+  box-shadow: 0 2px 6px rgba(234, 88, 12, 0.08) !important;
+}
+.door-entry .d-ico-linear svg {
+  width: 26px !important;
+  height: 26px !important;
+  stroke: #EA580C !important;
+}
+.door-entry .d-txt {
+  flex: 1 !important;
+  min-width: 0 !important;
+  text-align: left !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+.door-entry .d-txt b {
+  display: block !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: #9A3412 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.door-entry .d-txt span {
+  display: block !important;
+  font-size: 0.8rem !important;
+  color: #C2410C !important;
+  font-weight: 600 !important;
+  margin-top: 2px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.door-entry .d-arrow {
+  font-size: 1.1rem !important;
+  font-weight: 900 !important;
+  color: #EA580C !important;
+  flex: none !important;
+  margin-left: 4px !important;
+}
+
+/* 小花开瓣：面性花盆图标 + 严格单行排版 */
+.flower {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 10px 14px 0 !important;
+  padding: 10px 15px !important;
+  border-radius: 20px !important;
+  background: linear-gradient(135deg, #FFF7F8 0%, #FFFDF8 100%) !important;
+  border: 1.5px solid #F8D7DC !important;
+  box-shadow: 0 4px 12px -4px rgba(244, 143, 177, 0.16) !important;
+  text-align: left !important;
+  width: auto !important;
+  cursor: pointer !important;
+}
+.flower svg.pot {
+  width: 48px !important;
+  height: 54px !important;
+  flex: none !important;
+  overflow: visible !important;
+}
+.flower .fl-body {
+  flex: 1 !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+.flower b, .flower #flTitle {
+  display: block !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: #1E293B !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+}
+.flower #flSub {
+  display: block !important;
+  font-size: 0.8rem !important;
+  line-height: 1.25 !important;
+  color: #64748B !important;
+  margin-top: 3px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.flower .dots {
+  display: flex !important;
+  gap: 6px !important;
+  margin-top: 5px !important;
+}
+.flower .dots i {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background: #EADDE0 !important;
+  display: inline-block !important;
+}
+.flower .dots i.on {
+  background: #E56B8A !important;
+}
+
+/* 首页移动到中间的九宫格业务磁贴优化 */
+#home .grid {
+  margin: 12px 14px 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 10px !important;
+}
+#home .tile {
+  min-height: 78px !important;
+  border-radius: 18px !important;
+  padding: 12px 14px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+/* 隐藏首页悬浮遮挡按钮 */
+#phone:has(#home.on) .ai-float-btn,
+.screen#home.on ~ .ai-float-btn {
+  display: none !important;
+}
+
 </style>
 </head>
 <body>
@@ -2372,12 +2679,30 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
     <div id="wxSlot"></div>
     <div id="msgSlot"></div>
     <div id="momHeartNoteSlot"></div>
+
+    <!-- 业务服务核心九宫格（已上移至黄金中央区域） -->
+    <div class="grid">
+      <button class="tile bp" data-go="bp"><svg><use href="#i-heart"/></svg><span>量血压<small id="bpSub">今天还没量</small></span></button>
+      <button class="tile act" onclick="openTaxiModal()"><span class="t-emoji">🚕</span><span>助老打车<small>免输终点·亲情代付</small></span></button>
+      <button class="tile doc" data-go="reg"><svg><use href="#i-hosp"/></svg><span>挂号看病<small id="regSub">不用排队</small></span></button>
+      <button class="tile pay" data-go="bills"><span class="badge" id="billBadge"></span><svg><use href="#i-bill"/></svg><span>交水电费<small id="billSub"></small></span></button>
+      <button class="tile health" onclick="openBrainModal()"><span class="t-emoji">🧠</span><span>健脑茶馆<small>每日益智·防脑退化</small></span></button>
+      <button class="tile srv" data-go="service"><span class="t-emoji">🛠️</span><span>上门报修<small>物业师傅上门</small></span></button>
+      <button class="tile" style="background:linear-gradient(135deg,#D97706,#B45309)" onclick="openIotModal()"><span class="t-emoji">🏡</span><span>智能家居<small>燃气·夜灯无感看护</small></span></button>
+      <button class="tile" style="background:linear-gradient(135deg,#DC2626,#991B1B)" onclick="openScamModal()"><span class="t-emoji">🛡️</span><span>反诈卫士<small>可疑来电·AI拦截</small></span></button>
+    </div>
     <div class="door-entry" id="doorBtn" onclick="openDoorModal()" role="button" aria-label="出门防忘清单">
-      <span class="d-ico">🚪</span>
-      <span class="d-txt"><b>我要出门了 · 防忘清单</b><span>钥匙、燃气、手机、带药</span></span>
+      <span class="d-ico-linear">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+          <path d="M3 21h18"/>
+          <circle cx="15" cy="12" r="1.5" fill="#EA580C"/>
+        </svg>
+      </span>
+      <span class="d-txt"><b>我要出门 · 防忘清单</b><span>钥匙、燃气、手机、带药</span></span>
       <span class="d-arrow">➔</span>
     </div>
-    <button class="flower" id="flowerBtn" aria-label="今天的小花"><svg class="pot" id="pot" viewBox="0 0 70 78" aria-hidden="true"></svg><span><b id="flTitle"></b><span id="flSub"></span><span class="dots" id="flDots"></span></span></button>
+    <button class="flower" id="flowerBtn" aria-label="今天的小花"><svg class="pot" id="pot" viewBox="0 0 70 78" aria-hidden="true"></svg><div class="fl-body"><b id="flTitle"></b><span id="flSub"></span><span class="dots" id="flDots"></span></div></button>
     <button class="voicebar" id="voiceBtn" aria-label="说话就能用"><span class="mic"><svg><use href="#i-mic"/></svg></span><span><b>不想点，就说一句</b><span>比如说“给晓梅打电话”</span></span></button>
 
     
@@ -2417,16 +2742,7 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
       </div>
     </div>
 
-    <div class="grid">
-      <button class="tile bp" data-go="bp"><svg><use href="#i-heart"/></svg><span>量血压<small id="bpSub">今天还没量</small></span></button>
-      <button class="tile act" onclick="openTaxiModal()"><span class="t-emoji">🚕</span><span>助老打车<small>免输终点·亲情代付</small></span></button>
-      <button class="tile doc" data-go="reg"><svg><use href="#i-hosp"/></svg><span>挂号看病<small id="regSub">不用排队</small></span></button>
-      <button class="tile pay" data-go="bills"><span class="badge" id="billBadge"></span><svg><use href="#i-bill"/></svg><span>交水电费<small id="billSub"></small></span></button>
-      <button class="tile health" onclick="openBrainModal()"><span class="t-emoji">🧠</span><span>健脑茶馆<small>每日益智·防脑退化</small></span></button>
-      <button class="tile srv" data-go="service"><span class="t-emoji">🛠️</span><span>上门报修<small>物业师傅上门</small></span></button>
-      <button class="tile" style="background:linear-gradient(135deg,#D97706,#B45309)" onclick="openIotModal()"><span class="t-emoji">🏡</span><span>智能家居<small>燃气·夜灯无感看护</small></span></button>
-      <button class="tile" style="background:linear-gradient(135deg,#DC2626,#991B1B)" onclick="openScamModal()"><span class="t-emoji">🛡️</span><span>反诈卫士<small>可疑来电·AI拦截</small></span></button>
-    </div>
+    
 
     <button class="hold" id="sos" aria-label="紧急求助，按住 3 秒拨打 120 并通知家人">
       <div class="fill"></div>
@@ -6189,7 +6505,17 @@ function drawArc(){
 function safeBtn(){return safeAt!==null
   ?`<div class="safe sent"><span class="dot"><svg><use href="#i-check"/></svg></span><span><b>今天已报平安</b><span>${hm(safeAt)} 发给了晓梅和建国</span></span></div>`
   :`<button class="safe" data-safe><span class="dot"><svg><use href="#i-phone"/></svg></span><span><b>给家人报个平安</b><span>点一下，晓梅和建国就知道您今天很好</span></span></button>`;}
-const pillHTML=x=>`<div class="pillpic" style="background:${x.bg}"><i style="background:${x.pill}"></i></div>`;
+const pillHTML=x=>`<div class="pillpic vivid-pill" title="${x.name}">
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="32" height="32" rx="10" fill="#FFEDD5"/>
+      <g transform="translate(6, 6) rotate(-35 12 12)">
+        <rect x="3" y="6.5" width="18" height="11" rx="5.5" fill="#FF5722" stroke="#E64A19" stroke-width="1"/>
+        <path d="M12 6.5H15.5C18.5376 6.5 21 8.96243 21 12C21 15.0376 18.5376 17.5 15.5 17.5H12V6.5Z" fill="#FFB74D"/>
+        <line x1="12" y1="6.5" x2="12" y2="17.5" stroke="#D84315" stroke-width="1.2"/>
+        <rect x="5.5" y="8.5" width="4" height="2" rx="1" fill="#FFFFFF" fill-opacity="0.6"/>
+      </g>
+    </svg>
+  </div>`;
 
 function render(){
   const ph=phase(now);
@@ -6207,12 +6533,13 @@ function render(){
 
   const urgent=meds.find(x=>["due","missed"].includes(medState(x))), next=meds.find(x=>medState(x)==="later");
   const card=$("#nowCard");
+  const wxWeatherInline = `<div class="card-weather-strip"><span class="cws-icon">${rainy?"🌧️":"🌙"}</span><span class="cws-temp">最低 ${rainy?9:12}°</span><span class="cws-dot">·</span><span class="cws-tip">${rainy?"出门慢慢走，记得带伞":"出门记得加件外套"}</span></div>`;
   if(urgent){const miss=medState(urgent)==="missed";
-    card.innerHTML=`<span class="now-tag ${miss?"alert":""}">${miss?`${urgent.when}的药还没吃`:`现在该吃药了　${hm(urgent.t)}`}</span>
+    card.innerHTML=wxWeatherInline + `<span class="now-tag ${miss?"alert":""}">${miss?`${urgent.when}的药还没吃`:`现在该吃药了　${hm(urgent.t)}`}</span>
       <div class="pillrow">${pillHTML(urgent)}<div><h2>${urgent.name} ${urgent.dose}</h2><p>${urgent.use}　${urgent.how}</p></div></div>
       <button class="btn b-med" data-take="${urgent.id}"><svg><use href="#i-check"/></svg>我吃过了</button>`;
-  }else if(next){card.innerHTML=`<span class="now-tag ok">现在没有要紧事</span><h2>下一顿药　${nb(next.when+" "+hm(next.t))}</h2><p>${next.name} ${next.dose}，${next.how}。到时候会响铃提醒您。</p>${safeBtn()}`;
-  }else{card.innerHTML=`<span class="now-tag ok">今天的药都吃完了</span><h2>好好休息</h2><p>明天早上 8:00 再提醒您吃氨氯地平。</p>${safeBtn()}`;}
+  }else if(next){card.innerHTML=wxWeatherInline + `<span class="now-tag ok">现在没有要紧事</span><h2>下一顿药　${nb(next.when+" "+hm(next.t))}</h2><p>${next.name} ${next.dose}，${next.how}。到时候会响铃提醒您。</p>${safeBtn()}`;
+  }else{card.innerHTML=wxWeatherInline + `<span class="now-tag ok">今天的药都吃完了</span><h2>好好休息</h2><p>明天早上 8:00 再提醒您吃氨氯地平。</p>${safeBtn()}`;}
 
   const doneN=meds.filter(x=>x.done).length, left=meds.filter(x=>!x.done&&now>=x.t-30).length;
   if($("#medBadge")){ $("#medBadge").textContent=left;$("#medBadge").style.display=left?"":"none"; }
@@ -6277,7 +6604,7 @@ function renderWx(){
   if(rainy&&now<780)h=`<div class="wxtip"><svg><use href="#i-umb"/></svg><span>下午 3 点左右要下雨<small>出门记得带伞</small></span></div>`;
   else if(rainy&&now>=780&&now<1100)h=`<div class="wxtip"><svg><use href="#i-umb"/></svg><span>外面在下雨<small>路滑，出门慢慢走</small></span></div>`;
   else if(now>=1020&&now<1320)h=`<div class="wxtip cold"><svg><use href="#i-coat"/></svg><span>晚上降到 ${rainy?9:12}℃<small>出门记得加件外套</small></span></div>`;
-  slot.innerHTML=h;
+  slot.innerHTML=""; /* 天气已与吃药合并为一张卡片，不再单独占一行 */
 }
 function setRain(on){rainy=on;wxWarned=false;render();if(on&&now<780){say("秀英阿姨，下午三点左右要下雨，出门记得带伞哦。");push("今天下午有雨","已提醒妈妈出门带伞","blue");wxWarned=true;}}
 
