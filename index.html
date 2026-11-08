@@ -2292,6 +2292,153 @@ input, textarea, select {
   display: none !important;
 }
 
+
+/* ===== 广播收音机舒展三层分层排版：彻底解决文字拥挤折行 ===== */
+.radio-bar {
+  background: linear-gradient(145deg, #1E293B 0%, #0F172A 100%) !important;
+  color: #FFFFFF !important;
+  border-radius: 20px !important;
+  margin: 12px 14px 0 !important;
+  padding: 14px 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.35) !important;
+  border: 1.5px solid #334155 !important;
+  box-sizing: border-box !important;
+}
+
+.radio-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}
+
+.radio-station {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.radio-ico-badge {
+  font-size: 20px !important;
+  line-height: 1 !important;
+}
+
+.radio-station b {
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: #F8FAFC !important;
+  white-space: nowrap !important;
+}
+
+.radio-status-tag {
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #94A3B8 !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  padding: 3px 8px !important;
+  border-radius: 12px !important;
+  white-space: nowrap !important;
+}
+
+.radio-led {
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: #22C55E !important;
+  box-shadow: 0 0 6px #22C55E !important;
+}
+.radio-led.off {
+  background: #64748B !important;
+  box-shadow: none !important;
+}
+
+.radio-track-banner {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  padding: 9px 12px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.radio-track-banner .r-music-ico {
+  font-size: 14px !important;
+  flex: none !important;
+}
+
+#radioTrackName {
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: #FBBF24 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  flex: 1 !important;
+  text-align: left !important;
+}
+
+.radio-controls {
+  display: grid !important;
+  grid-template-columns: 1.35fr 1fr !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.radio-btn {
+  height: 40px !important;
+  border-radius: 14px !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  border: none !important;
+  transition: transform 0.12s ease !important;
+}
+.radio-btn:active {
+  transform: scale(0.96) !important;
+}
+
+.radio-btn.play, #radioPlayBtn {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35) !important;
+}
+
+.radio-btn.next, #radioNextBtn {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #E2E8F0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.radio-lyric-box {
+  background: rgba(0, 0, 0, 0.25) !important;
+  border-radius: 10px !important;
+  padding: 6px 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+.radio-lyric {
+  font-size: 12px !important;
+  color: #A7F3D0 !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
 </style>
 </head>
 <body>
@@ -2860,16 +3007,32 @@ body.in-sub-page .screen { padding-bottom:24px!important; }
       </div>
     </div>
 
-    <!-- 📻 经典长者广播收音机 -->
+    <!-- 📻 经典长者广播收音机（舒展三层分层排版） -->
     <div class="radio-bar" id="radioBar" role="region" aria-label="长者收音机">
-      <div class="radio-top">
-        <div class="radio-left">
-          <div class="radio-ico">📻<span class="radio-led off" id="radioLed"></span></div>
-          <div class="radio-txt">
-            <div style="display:flex;align-items:center;gap:6px">
-              <b>经典戏曲与健康广播台</b>
-              <div class="radio-eq" id="radioEq"><span class="r-bar"></span><span class="r-bar"></span><span class="r-bar"></span><span class="r-bar"></span></div>
-            </div>
+      <div class="radio-header">
+        <div class="radio-station">
+          <span class="radio-ico-badge">📻</span>
+          <b>经典戏曲与健康广播</b>
+          <div class="radio-eq" id="radioEq"><span class="r-bar"></span><span class="r-bar"></span><span class="r-bar"></span><span class="r-bar"></span></div>
+        </div>
+        <span class="radio-status-tag"><span class="radio-led off" id="radioLed"></span>养生戏曲台</span>
+      </div>
+
+      <div class="radio-track-banner">
+        <span class="r-music-ico">🎵</span>
+        <span id="radioTrackName">点击播放：越剧《红楼梦·天上掉下个林妹妹》</span>
+      </div>
+
+      <div class="radio-controls">
+        <button class="radio-btn play" id="radioPlayBtn">▶️ 打开广播</button>
+        <button class="radio-btn next" id="radioNextBtn">换一台 ⏭️</button>
+      </div>
+
+      <div class="radio-lyric-box" id="radioLyricBox" style="display:none">
+        <span style="font-size:14px">🎶</span>
+        <div class="radio-lyric" id="radioLyric">伴奏响起，准备开唱...</div>
+      </div>
+    </div>
             <span id="radioTrackName">点击播放：越剧《红楼梦·天上掉下个林妹妹》</span>
           </div>
         </div>
